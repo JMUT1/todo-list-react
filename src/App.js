@@ -9,6 +9,7 @@ const App = () => {
   ])
 
   function createTask(taskValue){
+    // con el ! te dice "si te devuelve undefinde"
     if(!tasksItems.find(task =>task.name === taskValue)){
       
       setTaskItems([...tasksItems, {name:taskValue, done:false}])
