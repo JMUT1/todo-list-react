@@ -9,7 +9,12 @@ const App = () => {
   ])
 
   function createTask(taskValue){
-    setTaskItems([...tasksItems, {name:taskValue, done:false}])
+    if(!tasksItems.find(task =>task.name === taskValue)){
+      
+      setTaskItems([...tasksItems, {name:taskValue, done:false}])
+    }else(
+      alert("Tarea repetida")
+    )
 
 
   }
@@ -27,8 +32,8 @@ const App = () => {
         </thead>
         <tbody>
           {
-            tasksItems.map((task, index )=>(
-              <tr key={index}>
+            tasksItems.map((task )=>(
+              <tr key={task.name}>
                 <td>
                 {task.name}
                 </td>
