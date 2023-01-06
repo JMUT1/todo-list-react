@@ -15,7 +15,7 @@ const TaskCreator = ({createTask}) => {
       <input type="text" onChange={(e)=>setTaskName(e.target.value)} value={newTaskName} placeholder="Enter text" className="form-control"/>
       </div>
     <div className="col-3">
-    <button>Click Me</button>
+    <button className="btn btn-primary btn-sm">Click Me</button>
 
     </div>
       </form>
