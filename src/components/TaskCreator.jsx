@@ -6,7 +6,6 @@ const TaskCreator = ({createTask}) => {
   const handleSubmite = (e)=>{
     e.preventDefault()
     createTask(newTaskName)
-    localStorage.setItem("task", newTaskName);
     setTaskName("")
   }
   

@@ -1,12 +1,25 @@
 import TaskCreator from "./components/TaskCreator";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import "./App.css";
 
 const App = () => {
 
-  const [tasksItems, setTaskItems] = useState([
-    {name: "mi primer tarea" , done: false}
-  ])
+  // USESTATE
+  const [tasksItems, setTaskItems] = useState([])
+
+  // USE EFFECT
+
+useEffect(()=>{
+  let data = localStorage.getItem("tasks")
+  if(data){
+    setTaskItems(JSON.parse(data))
+  }
+}, [])
+
+  useEffect(()=>{
+    localStorage.setItem("tasks", JSON.stringify(tasksItems))
+  }, [tasksItems])
+
 
   function createTask(taskValue){
     // con el ! te dice "si te devuelve undefinde"
