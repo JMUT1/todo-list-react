@@ -1,6 +1,7 @@
 import TaskCreator from "./components/TaskCreator";
 import { useState, useEffect } from "react";
 import TaskTable from "./components/TaskTable";
+import VisibilityControl from "./components/VisibilityControl";
 import "./App.css";
 
 const App = () => {
@@ -25,7 +26,7 @@ const App = () => {
   const toogleTask = (task) => {
           // USAS MAP en las tareas, primero revisas si la tarea que te pasan existe, si existe usas los ... para copiar las tareas existentes y modificas el valor de la propiedad done al valor seleccionado
     setTaskItems(
-      tasksItems.map((t) => (t.name == task.name ? { ...t, done: !t.done } : t))
+      tasksItems.map((t) => (t.name === task.name ? { ...t, done: !t.done } : t))
     );
   };
 
@@ -37,15 +38,18 @@ const App = () => {
     } else alert("Tarea repetida");
   }
 
+  // DELETE TASKS
+  const cleanTask = () =>{
+    setTaskItems(tasksItems.filter(task => !task.done)) 
+    setShowTaskDone(false)
+  }
+
   return (
     <div className="App">
       <TaskCreator createTask={createTask} />
       <TaskTable toogleTask={toogleTask} tasks={tasksItems} />
 
-      <div>
-        <input type="checkbox" onChange={(e) => setShowTaskDone(!showTaskDone)}></input> <label>Tasks completed</label>
-      </div>
-
+      <VisibilityControl isChecked={showTaskDone} setShowTaskDone={(checked)=> setShowTaskDone(checked)} cleanTask = {cleanTask} />
       {
         showTaskDone && (<TaskTable toogleTask={toogleTask} tasks={tasksItems} showCompleted= {showTaskDone}/>)
 
