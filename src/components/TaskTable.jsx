@@ -1,7 +1,7 @@
 import TaskRow from "./TaskRow"
 
 
-const TaskTable = ({tasks}) => {
+const TaskTable = ({tasks, toogleTask}) => {
   return (
     <table>
         <thead>
@@ -14,7 +14,7 @@ const TaskTable = ({tasks}) => {
         <tbody>
           {
             tasks.map((task )=>(
-              <TaskRow key={task.name} task ={task}/>
+              <TaskRow key={task.name} task ={task} toogleTask={toogleTask}/>
             ))
           }
         </tbody>

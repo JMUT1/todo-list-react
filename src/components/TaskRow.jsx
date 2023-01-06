@@ -1,5 +1,5 @@
 
-const TaskRow = ({task}) => {
+const TaskRow = ({task, toogleTask}) => {
   return (
     
     <tr key={task.name}>
@@ -7,6 +7,7 @@ const TaskRow = ({task}) => {
     {task.name}
     <input type="checkbox"
     checked={task.done}
+    onChange={()=> toogleTask(task)}
     
     />
     </td>
