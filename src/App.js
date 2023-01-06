@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import TaskTable from "./components/TaskTable";
 import VisibilityControl from "./components/VisibilityControl";
 import "./App.css";
+import Card from "./components/Card";
 
 const App = () => {
   // USESTATE
   const [tasksItems, setTaskItems] = useState([]);
-  const [showTaskDone, setShowTaskDone] = useState(false)
+  const [showTaskDone, setShowTaskDone] = useState(false);
 
   // USE EFFECT & LOGALSTORAGE
 
@@ -24,12 +25,15 @@ const App = () => {
 
   // TOOGLE TASK FUNCION
   const toogleTask = (task) => {
-          // USAS MAP en las tareas, primero revisas si la tarea que te pasan existe, si existe usas los ... para copiar las tareas existentes y modificas el valor de la propiedad done al valor seleccionado
+    // USAS MAP en las tareas, primero revisas si la tarea que te pasan existe, si existe usas los ... para copiar las tareas existentes y modificas el valor de la propiedad done al valor seleccionado
     setTaskItems(
-      tasksItems.map((t) => (t.name === task.name ? { ...t, done: !t.done } : t))
+      tasksItems.map((t) =>
+        t.name === task.name ? { ...t, done: !t.done } : t
+      )
     );
   };
 
+  // PARA no aceptar valores repetidos
   function createTask(taskValue) {
     // con el ! te dice "si te devuelve undefinde"
     if (!tasksItems.find((task) => task.name === taskValue)) {
@@ -39,24 +43,31 @@ const App = () => {
   }
 
   // DELETE TASKS
-  const cleanTask = () =>{
-    setTaskItems(tasksItems.filter(task => !task.done)) 
-    setShowTaskDone(false)
-  }
+  const cleanTask = () => {
+    setTaskItems(tasksItems.filter((task) => !task.done));
+    setShowTaskDone(false);
+  };
 
   return (
-    <div className="App">
-      <TaskCreator createTask={createTask} />
-      <TaskTable toogleTask={toogleTask} tasks={tasksItems} />
+    <main className="bg-dark vh-100 text-white ">
+      <Card>
+        <TaskCreator createTask={createTask} />
+        <TaskTable toogleTask={toogleTask} tasks={tasksItems} />
 
-      <VisibilityControl isChecked={showTaskDone} setShowTaskDone={(checked)=> setShowTaskDone(checked)} cleanTask = {cleanTask} />
-      {
-        showTaskDone && (<TaskTable toogleTask={toogleTask} tasks={tasksItems} showCompleted= {showTaskDone}/>)
-
-      }
-
-
-    </div>
+        <VisibilityControl
+          isChecked={showTaskDone}
+          setShowTaskDone={(checked) => setShowTaskDone(checked)}
+          cleanTask={cleanTask}
+        />
+        {showTaskDone && (
+          <TaskTable
+            toogleTask={toogleTask}
+            tasks={tasksItems}
+            showCompleted={showTaskDone}
+          />
+        )}
+      </Card>
+    </main>
   );
 };
 

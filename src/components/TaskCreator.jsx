@@ -10,12 +10,15 @@ const TaskCreator = ({createTask}) => {
   }
   
   return (
-    <div className="App" onSubmit={handleSubmite}>
-      <form>
-        <input type="text" onChange={(e)=>setTaskName(e.target.value)} value={newTaskName} placeholder="Enter text"/>
-        <button>Click Me</button>
-      </form>
+      <form onSubmit={handleSubmite} className= "my-2 row"> 
+      <div className="col-9">
+      <input type="text" onChange={(e)=>setTaskName(e.target.value)} value={newTaskName} placeholder="Enter text" className="form-control"/>
+      </div>
+    <div className="col-3">
+    <button>Click Me</button>
+
     </div>
+      </form>
   )
 }
 
