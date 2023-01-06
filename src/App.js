@@ -6,6 +6,7 @@ import "./App.css";
 const App = () => {
   // USESTATE
   const [tasksItems, setTaskItems] = useState([]);
+  const [showTaskDone, setShowTaskDone] = useState(false)
 
   // USE EFFECT & LOGALSTORAGE
 
@@ -37,9 +38,20 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className="App">
       <TaskCreator createTask={createTask} />
       <TaskTable toogleTask={toogleTask} tasks={tasksItems} />
+
+      <div>
+        <input type="checkbox" onChange={(e) => setShowTaskDone(!showTaskDone)}></input> <label>Tasks completed</label>
+      </div>
+
+      {
+        showTaskDone && (<TaskTable toogleTask={toogleTask} tasks={tasksItems} showCompleted= {showTaskDone}/>)
+
+      }
+
+
     </div>
   );
 };
