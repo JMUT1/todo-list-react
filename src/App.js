@@ -1,5 +1,6 @@
 import TaskCreator from "./components/TaskCreator";
 import { useState, useEffect} from "react";
+import TaskTable from "./components/TaskTable";
 import "./App.css";
 
 const App = () => {
@@ -7,7 +8,7 @@ const App = () => {
   // USESTATE
   const [tasksItems, setTaskItems] = useState([])
 
-  // USE EFFECT
+  // USE EFFECT & LOGALSTORAGE
 
 useEffect(()=>{
   let data = localStorage.getItem("tasks")
@@ -36,27 +37,8 @@ useEffect(()=>{
   return (
     <div>
       <TaskCreator createTask={createTask} />
-      <table>
-        <thead>
-        <tr>
-          <td>
-            Task
-          </td>
-        </tr>
-        </thead>
-        <tbody>
-          {
-            tasksItems.map((task )=>(
-              <tr key={task.name}>
-                <td>
-                {task.name}
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-
+      <TaskTable tasks={tasksItems}/>
+      
     </div>
   );
 };
